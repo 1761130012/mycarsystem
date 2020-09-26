@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <ul class="nav nav-tabs"></ul>
+    <div class="tab-content"></div>
+</div>
+<script type="text/javascript">
+    function addTab(id, name, url, closable) {
+        closableTab.addTab({
+            'id': id,
+            'name': name,
+            'url': url,
+            'closable': eval(closable) !== 0
+        });
+    }
+
+    addTab(0, "张三", '', 0);
+</script>
+</body>
+</html>

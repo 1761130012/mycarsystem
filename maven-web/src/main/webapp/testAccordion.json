@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "name": "菜单管理！！！！",
+    "child": [
+      {
+        "id": 1,
+        "name": "添加",
+        "url": "test1.html",
+        "closable": 1
+      },{
+        "id": 2,
+        "name": "修改",
+        "url": "test2.html",
+        "closable": 1
+      },{
+        "id": 3,
+        "name": "删除",
+        "url": "test1.html",
+        "closable": 1
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "角色管理"
+  }
+]

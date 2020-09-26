@@ -1,0 +1,68 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+        http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         id="WebApp_ID" version="3.1">
+  <display-name>Archetype Created Web Application</display-name>
+
+  <welcome-file-list>
+    <welcome-file>login.jsp</welcome-file>
+  </welcome-file-list>
+
+  <!-- 加载 spring 容器 -->
+  <!-- spring配置文件的路径 -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationContext.xml</param-value>
+  </context-param>
+  <!-- 监听器 初始化spring 容器 -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+  <!-- 加载 spring Mvc -->
+  <!-- 加载 中心处理器 -->
+  <servlet>
+    <servlet-name>dispatcherServlet</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:springMVC-servlet.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+    <!-- location：上传文件用到的临时文件夹，是一个绝对路径，需要注意，这个属性是必填的
+        max-file-size:上传文件的最大值，单位是byte，默认没有限制
+        max-request-size:整个mutipart请求的最大值，单位是byte，默认没有限制 -->
+    <multipart-config>
+      <location>D:\盖世神龙\S3\springMVC\warehouse\springMVC_07\src\main\webapp\resources\temporary</location>
+      <!-- <max-file-size>2097152</max-file-size>
+       <max-request-size>4194304</max-request-size>-->
+    </multipart-config>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>dispatcherServlet</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+  <!-- 配置 中文 过滤器 -->
+  <filter>
+    <filter-name>characterEncodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>characterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+</web-app>

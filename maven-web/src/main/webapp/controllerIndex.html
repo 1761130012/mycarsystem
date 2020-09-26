@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台页面</title>
+</head>
+<link href="resources/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="resources/css/bootstrap-treeview.min.css" rel="stylesheet"/>
+<script src="resources/js/jquery.min.js"></script>
+<script src="resources/js/bootstrap.min.js"></script>
+<script src="resources/js/bootstrap-treeview.min.js"></script>
+<script src="resources/js/bootstrap-closable-tab.js"></script>
+<body>
+<!-- 顶部导航条 -->
+<nav class="navbar-default">
+    <div class="container-fluid">
+        <!-- 头部 -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">我的后台</a>
+        </div>
+
+        <!-- 主要 -->
+        <div class="collapse navbar-collapse" id="navbar-collapse-1">
+            <ul class="nav navbar-right">
+                <li><a href="#">安全退出</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="well container-fluid" style="padding: 30px">
+    <div class="row">
+        <div class="col-md-2" id="left_accordion"></div>
+
+        <div class="col-md-9" id="right_tab"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        
+
+        getHtml("#left_accordion", "accordionIndex.html");
+        getHtml("#right_tab", "tabIndex.html");
+        function getHtml(id, url) {
+            $.ajax({
+                url: url,
+                async:false,
+                success: function (data) {
+                    $(id).html(data);
+                }
+            })
+        }
+    })
+</script>
+</body>
+</html>

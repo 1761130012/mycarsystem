@@ -1,0 +1,10 @@
+2020-09-23 17:20:16  [ main:243 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
+2020-09-23 20:43:44  [ main:314 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
+2020-09-23 20:46:47  [ main:258 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
+2020-09-23 20:51:47  [ main:227 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
+2020-09-23 21:00:29  [ main:226 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
+2020-09-23 21:02:28  [ main:242 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
+2020-09-23 21:03:53  [ main:238 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
+2020-09-23 21:26:02  [ main:246 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
+2020-09-23 21:26:23  [ main:223 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
+2020-09-24 08:56:16  [ main:240 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set

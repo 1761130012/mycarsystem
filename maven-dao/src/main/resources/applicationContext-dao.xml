@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- spring 容器 -->
+    <!-- 扫描 注解 不扫描 子类(springMVC) controller 注解    vo 包 是 pageVo-->
+    <context:component-scan base-package="com.dao"/>
+    <context:component-scan base-package="com.vo"/>
+    <context:component-scan base-package="com.utils"/>
+
+    <!-- 初始化数据源对象: 德鲁伊 DruidDataSource -->
+    <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <!-- 与数据库建立的基本信息 -->
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url"
+                  value="jdbc:mysql://localhost:3306/car_rental_system?serverTimezone=Asia/Shanghai"/>
+        <property name="username" value="root"/>
+        <property name="password" value="123456"/>
+        <!-- 关于数据库连接池的基本信息 -->
+        <property name="maxActive" value="50"/>
+        <property name="initialSize" value="5"/>
+        <property name="minIdle" value="1"/>
+        <property name="maxWait" value="60000"/>
+    </bean>
+
+    <!-- 配置 SqlSessionFactory 的 bean 和 mybatis 配置文件 -->
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="druidDataSource"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+    </bean>
+
+    <!-- 配置 mybatis 接口的代理对象 bean 根据 指定的包 把 sql 映射文件 找出来 创建对象 指定 代理对象 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.dao"/>
+    </bean>
+</beans>
