@@ -1,0 +1,71 @@
+[
+  {
+    "text": "系统管理",
+    "state": {
+      "checked": true
+    },
+    "tags": [
+      10
+    ],
+    "nodes": [
+      {
+        "text": "员工管理",
+        "state": {
+          "checked": true
+        },
+        "tags": [
+          3
+        ],
+        "nodes": [
+          {
+            "text": "员工管理-增加",
+            "state": {
+              "checked": true
+            }
+          },
+          {
+            "text": "员工管理-修改",
+            "state": {
+              "checked": false
+            }
+          },
+          {
+            "text": "员工管理-删除",
+            "state": {
+              "checked": true
+            }
+          }
+        ]
+      },
+      {
+        "text": "角色管理",
+        "state": {
+          "checked": true
+        },
+        "tags": [
+          3
+        ],
+        "nodes": [
+          {
+            "text": "角色管理-增加",
+            "state": {
+              "checked": false
+            }
+          },
+          {
+            "text": "角色管理-修改",
+            "state": {
+              "checked": false
+            }
+          },
+          {
+            "text": "角色管理-删除",
+            "state": {
+              "checked": true
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

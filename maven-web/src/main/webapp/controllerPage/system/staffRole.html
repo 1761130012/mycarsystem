@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>员工角色管理</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <table id="system_staffRole_staff"></table>
+        </div>
+        <div class="col-md-5">
+            <input type="button" class="btn btn-info" value="点击修改"/>
+            <table id="system_staffRole_role"></table>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        let headUrl = "controllerPage/system/";
+        let staffTable = "#system_staffRole_staff";
+        $(staffTable).bootstrapTable({
+            url: headUrl + "staffRole_staffTable.json",
+            pagination: true,
+            columns: [
+                {field: "id", title: "编号"},
+                {field: "name", title: "员工名"},
+                {field: "remark", title: "介绍"}
+            ]
+        })
+
+        let roleTable = "#system_staffRole_role";
+        $(roleTable).bootstrapTable({
+            url:headUrl+"staffRole_roleTable.json",
+            columns: [
+                {field: "id", title: "编号"},
+                {field: "name", title: "角色名"},
+                {field: "remark", title: "备注"}
+            ]
+        })
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>员工管理</title>
+    <!--<script src="../../resources/js/jquery.min.js"></script>
+    <script src="../../resources/js/bootstrap.js"></script>
+    <script src="../../resources/js/bootstrap-table.js"></script>
+    <script src="../../resources/js/bootstrap-table-zh-CN.min.js"></script>
+    <link rel="stylesheet" href="../../resources/css/bootstrap.css">
+    <link rel="stylesheet" href="../../resources/css/bootstrap-table.css">-->
+</head>
+<body>
+<div class="container">
+    <div class="row" style="margin-top: 10px">
+        <div id="system_staff_toolbar">
+            <input type="button" class="btn btn-info" id='system_staff_add' value="添加"/>
+            <input type='button' class='btn btn-info' value='修改'/>
+            <input type='button' class='btn btn-danger' value='删除'/>
+        </div>
+        <table id="system_staff_table"></table>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        let headUrl = "controllerPage/system/";
+
+        let staff_table = "#system_staff_table";
+        $(staff_table).bootstrapTable({
+            url: headUrl + "staff_table.json",
+            clickToSelect: true,
+            toolbar: "#system_staff_toolbar",//自定义工具栏
+            pagination: true,
+            showRefresh: true,//刷新
+            paginationLoop: true,
+            pageNumber: 1,
+            pageSize: 3,
+            pageList: [3, 5, 6],
+            paginationHAlign: "left",
+            paginationPreText: "<",
+            paginationNextText: ">",
+            paginationVAlign:'bottom',
+            columns: [
+                {checkbox: true},
+                {field: "id", title: "编号"},
+                {field: "name", title: "名称"},
+                {field: "phone", title: "手机号"}
+            ]
+        })
+
+        $("#system_staff_add").click(function () {
+            console.log("dsf")
+            myDialogModal("添加角色",headUrl+"staff/add.html");
+        })
+    })
+</script>
+</body>
+</html>

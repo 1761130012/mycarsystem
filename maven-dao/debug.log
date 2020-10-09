@@ -1,18 +1,13 @@
-2020-09-26 16:16:54  [ main:148 ] - [ DEBUG ]  SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@25ce9dc4] was not registered for synchronization because synchronization is not active
-2020-09-26 16:16:54  [ main:244 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
-2020-09-26 16:16:54  [ main:1020 ] - [ INFO ]  {dataSource-1} inited
-2020-09-26 16:16:54  [ main:1023 ] - [ DEBUG ]  JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@1e636ea3] will not be managed by Spring
-2020-09-26 16:16:54  [ main:1027 ] - [ DEBUG ]  ==>  Preparing: select * from test_user 
-2020-09-26 16:16:54  [ main:1050 ] - [ DEBUG ]  ==> Parameters: 
-2020-09-26 16:16:55  [ main:1105 ] - [ DEBUG ]  <==      Total: 2
-2020-09-26 16:16:55  [ main:1107 ] - [ DEBUG ]  Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@25ce9dc4]
-2020-10-05 20:42:55  [ main:0 ] - [ DEBUG ]  Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
-2020-10-05 20:42:55  [ main:187 ] - [ DEBUG ]  Creating a new SqlSession
-2020-10-05 20:42:55  [ main:210 ] - [ DEBUG ]  SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@25ce9dc4] was not registered for synchronization because synchronization is not active
-2020-10-05 20:42:56  [ main:375 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
-2020-10-05 20:42:57  [ main:1669 ] - [ INFO ]  {dataSource-1} inited
-2020-10-05 20:42:57  [ main:1674 ] - [ DEBUG ]  JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@1e636ea3] will not be managed by Spring
-2020-10-05 20:42:57  [ main:1680 ] - [ DEBUG ]  ==>  Preparing: select * from test_user 
-2020-10-05 20:42:57  [ main:1721 ] - [ DEBUG ]  ==> Parameters: 
-2020-10-05 20:42:57  [ main:1768 ] - [ DEBUG ]  <==      Total: 2
-2020-10-05 20:42:57  [ main:1771 ] - [ DEBUG ]  Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@25ce9dc4]
+2020-10-09 18:43:54  [ main:203 ] - [ DEBUG ]  Reader entry: <?xml version="1.0" encoding="UTF-8" ?>
+2020-10-09 18:43:54  [ main:204 ] - [ DEBUG ]  Checking to see if class com.dao.SystemMenuDao matches criteria [is assignable to Object]
+2020-10-09 18:43:54  [ main:208 ] - [ DEBUG ]  Checking to see if class com.dao.SystemRoleDao matches criteria [is assignable to Object]
+2020-10-09 18:43:54  [ main:214 ] - [ DEBUG ]  Checking to see if class com.dao.SystemStaffDao matches criteria [is assignable to Object]
+2020-10-09 18:43:55  [ main:1190 ] - [ DEBUG ]  Creating a new SqlSession
+2020-10-09 18:43:55  [ main:1203 ] - [ DEBUG ]  SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6ca18a14] was not registered for synchronization because synchronization is not active
+2020-10-09 18:43:55  [ main:1389 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
+2020-10-09 18:43:56  [ main:2057 ] - [ INFO ]  {dataSource-1} inited
+2020-10-09 18:43:56  [ main:2061 ] - [ DEBUG ]  JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@75b25825] will not be managed by Spring
+2020-10-09 18:43:56  [ main:2068 ] - [ DEBUG ]  ==>  Preparing: SELECT id,text,url,parentId FROM system_menu WHERE parentId=? and id in ( ? , ? , ? )
+2020-10-09 18:43:56  [ main:2091 ] - [ DEBUG ]  ==> Parameters: 0(Integer), 1(Integer), 2(Integer), 3(Integer)
+2020-10-09 18:43:56  [ main:2112 ] - [ DEBUG ]  <==      Total: 3
+2020-10-09 18:43:56  [ main:2114 ] - [ DEBUG ]  Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6ca18a14]

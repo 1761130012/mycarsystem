@@ -37,13 +37,7 @@ var closableTab = {
     },
 
     myAjaxFrame: function (id, url) {
-        $.ajax({
-            url: url,
-            async: false,
-            success: function (data) {
-                $(id).html(data);
-            }
-        })
+         $(id).load(url);
     },
 
     //关闭tab

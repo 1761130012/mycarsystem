@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>菜单管理</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="well form-inline">
+            <input type="button"  value="添加同级" class="form-control btn-info"/>
+            <input type="button" id="system_menu_addChild" value="添加子级" class="disabled form-control btn-info"/>
+            <input type="button" value="修改" class="form-control btn-info"/>
+            <input type="button" value="删除" class="form-control btn-danger"/>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: -20px">
+        <div id="system_menu_treeView"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        let headUrl = "controllerPage/system/";
+
+        let treeData;
+        $.ajax({
+            url: headUrl + "menu_treeView.json",
+            async: false,
+            success: function (data) {
+                treeData = data;
+            }
+        })
+        let treeViewId = "#system_menu_treeView";
+        $(treeViewId).treeview({
+            data: treeData,
+            onNodeSelected: function (event, node) {
+                if(!isNaN(node.parentId)){
+                    $("#system_menu_addChild").addClass("disabled").css("cursor","not-allowed");
+                }else{
+                    $("#system_menu_addChild").removeClass("disabled").css("cursor","pointer");
+                }
+            }
+        })
+    })
+
+</script>
+</body>
+</html>

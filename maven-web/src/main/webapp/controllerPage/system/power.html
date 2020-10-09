@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>权限管理</title>
+</head>
+<body>
+<div class="container">
+    <div class="row well">
+        <div class="col-md-1"><input type="button" value="授权" class="form-control" id="system_power_submit"/></div>
+    </div>
+    <div class="row">
+        <!-- 左边角色 -->
+        <div class="col-md-4">
+            <table id="system_power_roleTable"></table>
+        </div>
+
+        <div class="col-md-8">
+            <div id="system_power_treeView"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        let headUrl = "controllerPage/system/";
+
+        $("#system_power_roleTable").bootstrapTable({
+            url: headUrl + 'power_role.json',
+            pagination: true,
+            columns: [
+                {field: 'id', title: '编号'},
+                {field: 'name', title: '角色名'},
+                {field: 'remark', title: '备注'},
+            ],
+            //点击行进行 加载
+            onClickRow: function (item) {
+                alert("行已经点击："+item.name)
+            }
+        })
+
+        $("#system_power_submit").click(function () {
+            let array = $(treeViewId).treeview("getChecked");
+            alert("个数为：" + array.length)
+        })
+
+
+        var treeViewData;
+        $.ajax({
+            url: headUrl + "power_treeView.json",
+            async: false,
+            success: function (date) {
+                treeViewData = date;
+            }
+        })
+        let treeViewId = "#system_power_treeView";
+        $(treeViewId).treeview({
+            showCheckbox: true,
+            data: treeViewData,
+            showTags: true,
+            onNodeChecked: nodeChecked,
+            onNodeUnchecked: nodeUnchecked
+        })
+
+        /* 拓展选中的方法 */
+        let nodeCheckedSilent = false;
+
+        function nodeChecked(event, node) {
+            if (nodeCheckedSilent) {
+                return;
+            }
+            nodeCheckedSilent = true;
+            checkAllParent(node);
+            checkAllSon(node);
+            nodeCheckedSilent = false;
+        }
+
+        let nodeUncheckedSilent = false;
+
+        function nodeUnchecked(event, node) {
+            if (nodeUncheckedSilent)
+                return;
+            nodeUncheckedSilent = true;
+            uncheckAllParent(node);
+            uncheckAllSon(node);
+            nodeUncheckedSilent = false;
+        }
+
+        //选中全部父节点
+        function checkAllParent(node) {
+            $(treeViewId).treeview('checkNode', node.nodeId, {silent: true});
+            let parentNode = $(treeViewId).treeview('getParent', node.nodeId);
+            if (!("nodeId" in parentNode)) {
+                return;
+            } else {
+                checkAllParent(parentNode);
+            }
+        }
+
+        //取消全部父节点
+        function uncheckAllParent(node) {
+            $(treeViewId).treeview('uncheckNode', node.nodeId, {silent: true});
+            let siblings = $(treeViewId).treeview('getSiblings', node.nodeId);
+            let parentNode = $(treeViewId).treeview('getParent', node.nodeId);
+            if (!("nodeId" in parentNode)) {
+                return;
+            }
+            let isAllUnchecked = true;  //是否全部没选中
+            for (let i in siblings) {
+                if (siblings[i].state.checked) {
+                    isAllUnchecked = false;
+                    break;
+                }
+            }
+            if (isAllUnchecked) {
+                uncheckAllParent(parentNode);
+            }
+        }
+
+        //级联选中所有子节点
+        function checkAllSon(node) {
+            $(treeViewId).treeview('checkNode', node.nodeId, {silent: true});
+            if (node.nodes != null && node.nodes.length > 0) {
+                for (let i in node.nodes) {
+                    checkAllSon(node.nodes[i]);
+                }
+            }
+        }
+
+        //级联取消所有子节点
+        function uncheckAllSon(node) {
+            $(treeViewId).treeview('uncheckNode', node.nodeId, {silent: true});
+            if (node.nodes != null && node.nodes.length > 0) {
+                for (let i in node.nodes) {
+                    uncheckAllSon(node.nodes[i]);
+                }
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

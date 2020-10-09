@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台页面</title>
+    <link href="resources/css/bootstrap.css" rel="stylesheet"/>
+    <link href="resources/css/bootstrap-treeview.min.css" rel="stylesheet"/>
+    <link href="resources/css/bootstrap-table.css" rel="stylesheet">
+
+    <script src="resources/js/jquery.min.js"></script>
+    <script src="resources/js/bootstrap.min.js"></script>
+    <script src="resources/js/bootstrap-treeview.min.js"></script>
+    <script src="resources/js/bootstrap-closable-tab.js"></script>
+    <script src="resources/js/bootstrap-table.js"></script>
+    <script src="resources/js/bootstrap-table-zh-CN.min.js"></script>
+    <script src="resources/js/bootbox.js"></script>
+    <script src="resources/js/bootbox.locales.js"></script>
+    <style type="text/css">
+        /* 隐藏机制 */
+        *[data-discern-code='0'] {
+            display: inline;
+        }
+
+        *[data-discern-code='1'] {
+            display: none;
+        }</style>
+</head>
+<body>
+<!-- 顶部导航条 -->
+<nav class="navbar-default">
+    <div class="container-fluid">
+        <!-- 头部 -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">我的后台</a>
+        </div>
+
+        <!-- 主要 -->
+        <div class="collapse navbar-collapse" id="navbar-collapse-1">
+            <ul class="nav navbar-right">
+                <li><a href="#">安全退出</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="well container-fluid" style="padding: 30px">
+    <div class="row">
+        <div class="col-md-2" id="left_accordion"></div>
+        <div class="col-md-9" id="right_tab"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    init();
+    function init() {
+        bootbox.setLocale("zh_CN");
+    }
+
+
+    $(function () {
+        $("#left_accordion").load("accordionIndex.html");
+        $("#right_tab").load("tabIndex.html");
+    })
+
+    function myAlert(title, message, fn) {
+        bootbox.alert({
+            backdrop: true,//点击背景 进行关闭
+            title: title,
+            message: message,
+            callback: fn
+        })
+    }
+
+    function myConfirm(title, message, fn) {
+        bootbox.confirm({
+            title: title,
+            message: message,
+            callback: fn,
+            backdrop: true,//点击背景 进行关闭
+        })
+    }
+
+    function myPrompt(title, fn) {
+        bootbox.prompt({
+            title: title,
+            callback: fn,
+            centerVertical: true,
+            backdrop: true,//点击背景 进行关闭
+        });
+    }
+
+    /**
+     * 返回 :
+     * 0 错误 并弹框
+     *  否则返回行
+     * @param selectorTable table 选择器 仅支持 id
+     */
+    function myIsSelectRowTable(selectorTable) {
+        let rows = $(selectorTable).bootstrapTable("getSelections");
+        if (rows.length === 0) {
+            myAlert("错误提示：", "<strong style='color: red'>未选中行</strong>");
+            return 0;
+        }
+        return rows;
+    }
+
+    function myDialogModal(title,url) {
+        let modal=$("<div></div>").load(url);
+        bootbox.dialog({
+            title:"<div class='text-center' style='font-size: 20px'>"+title+"</div>",
+            message: modal,
+        })
+    }
+
+
+    /**
+     * 增改删 按钮 进行 添加 识别码
+     * @param tabId 选项卡 id 代表 菜单的 id
+     * @param createId 添加Id
+     * @param updateId 修改Id
+     * @param deleteId 删除Id
+     */
+    function addCRUDButtonCode(tabId,createId,updateId,deleteId) {
+
+    }
+</script>
+</body>
+</html>

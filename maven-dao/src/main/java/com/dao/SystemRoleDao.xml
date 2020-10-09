@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.SystemRoleDao">
+
+    <!-- List<Integer> selectListMenuIdStaffId(String staffId); -->
+    <select id="selectListMenuIdStaffId" parameterType="String" resultType="Integer">
+        SELECT DISTINCT menuId FROM system_role_menu WHERE roleId in(
+            SELECT roleId FROM system_staff_role WHERE staffId=#{id})
+    </select>
+</mapper>
