@@ -10,6 +10,10 @@
     <div class="tab-content" style="box-shadow: 5px 5px 5px #888888;"></div>
 </div>
 <script type="text/javascript">
+    $(function () {
+        addTab(0, "张三", '', 0);
+    })
+
     function addTab(id, name, url, closable) {
         closableTab.addTab({
             'id': id,
@@ -19,7 +23,6 @@
         });
     }
 
-    addTab(0, "张三", '',0);
 </script>
 </body>
 </html>

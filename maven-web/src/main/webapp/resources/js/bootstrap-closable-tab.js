@@ -24,7 +24,7 @@ var closableTab = {
             }
 
             var tabpanel = '<div role="tabpanel" class="tab-pane" id="' + container + '" style="width: 100%;">' +
-                "<div src=" + tabItem.url + " id='tab_frameId_" + tabItem.id + "' frameborder=0 style='overflow-x: hidden; overflow-y: hidden;width:100%;height: 600px;background-color: white'  onload='closableTab.frameLoad(this)'></div>" +
+                "<div src=" + tabItem.url + " id='tab_frameId_" + tabItem.id + "' frameborder=0 style='overflow-x: hidden;overflow-y: auto;width:100%;height: 700px;background-color: white'  onload='closableTab.frameLoad(this)'></div>" +
                 '</div>';
 
             $('.nav-tabs').append(li_tab);

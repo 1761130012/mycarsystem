@@ -21,7 +21,8 @@
             "text": "员工管理-增加",
             "state": {
               "checked": true
-            }
+            },
+            "nodes": null
           },
           {
             "text": "员工管理-修改",

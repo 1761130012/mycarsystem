@@ -5,12 +5,14 @@ import com.vo.SystemMenu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-@RequestMapping("/system")
+@RequestMapping("/systemMenu")
 public class SystemMenuController {
     @Autowired
     private SystemMenuService systemMenuService;
@@ -26,5 +28,47 @@ public class SystemMenuController {
 
         //进行查询
         return systemMenuService.queryListMenuStaff((String) request.getSession().getAttribute("staffId"));
+    }
+
+    @RequestMapping("/queryListMenuStaffBath")
+    @ResponseBody
+    public List<SystemMenu> queryListMenuStaffBath(@RequestParam(defaultValue = "0") int id) {
+        return systemMenuService.queryListMenuStaffBath(id);
+    }
+
+    @RequestMapping("/queryAll")
+    @ResponseBody
+    public List<SystemMenu> queryAll() {
+        return systemMenuService.queryAll(0);
+    }
+
+    @RequestMapping("/queryMenuTitleParentId")
+    @ResponseBody
+    public String queryMenuTitleParentId(int id) {
+        return systemMenuService.queryMenuTitleParentId(id);
+    }
+
+    @RequestMapping("/insertMenu")
+    @ResponseBody
+    public boolean insertMenu(SystemMenu menu){
+        return systemMenuService.insertMenu(menu);
+    }
+
+    @RequestMapping("/updateMenu")
+    @ResponseBody
+    public boolean updateMenu(SystemMenu menu){
+        return systemMenuService.updateMenu(menu);
+    }
+
+    @RequestMapping("/queryMenuId")
+    @ResponseBody
+    public SystemMenu queryMenuId(int id){
+        return systemMenuService.queryMenuId(id);
+    }
+
+    @RequestMapping("/deleteMenuId")
+    @ResponseBody
+    public boolean deleteMenuId(int id){
+        return systemMenuService.deleteMenuId(id);
     }
 }

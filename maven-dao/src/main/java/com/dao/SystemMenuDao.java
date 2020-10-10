@@ -9,4 +9,8 @@ import java.util.List;
 public interface SystemMenuDao extends BaseMapper<SystemMenu> {
 
     List<SystemMenu> selectMenuId(@Param("parentId") int parentId, @Param("menuId") List<Integer> menuId);
+
+    List<SystemMenu> selectMenuParentIdId(int parentId);
+
+    String selectTitleParentIds(int id);
 }

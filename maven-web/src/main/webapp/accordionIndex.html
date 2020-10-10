@@ -10,9 +10,9 @@
 <script type="text/javascript">
     $(function () {
         //菜单栏的背景效果
-        $("#my_accordion").on("click",function (e) {
+        $("#my_accordion").on("click", function (e) {
             //如果点击的是手风琴组件里面的列表项
-            if($(e.target).hasClass("list-group-item")) {
+            if ($(e.target).hasClass("list-group-item")) {
                 //将所有列表项的选中状态清空
                 $(this).find("a").removeClass("active");
                 //将点击的列表项设置上选中状态
@@ -20,15 +20,13 @@
             }
         })
 
-        let array = [];
         $.ajax({
-            url: 'system/queryListMenuStaff',
+            url: 'systemMenu/queryListMenuStaff',
             async: false,//是否异步
             success: function (data) {
-                array = data;
+                addAccordion(JSON.parse(data));
             }
         })
-        addAccordion(array);
 
         function addAccordion(array) {
             for (let i = 0; i < array.length; i++) {
@@ -36,8 +34,7 @@
                 let listNodes = array[i].nodes;
                 if (listNodes !== undefined && listNodes.legend !== 0) {
                     $.each(listNodes, function () {
-                        let param = this.id + ",'" + this.text + "','" + this.url+"'";
-                        nodesA += "<a href='#' class=\"list-group-item\" onclick=addTab(" + param + ") >" + this.text + "</a>";
+                        nodesA += "<a href='#' class=\"list-group-item\" onclick=addTab(" + this.id + ",'" + this.text + "','" + this.url + "') >" + this.text + "</a>";
                     });
                 }
 

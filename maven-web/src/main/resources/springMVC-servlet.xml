@@ -44,15 +44,15 @@
         </property>
     </bean>
 
-    <!-- 自定义视图解析器  InternalResourceViewResolver-->
+   <!-- &lt;!&ndash; 自定义视图解析器  InternalResourceViewResolver&ndash;&gt;
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <!--&lt;!&ndash; 前缀 &ndash;&gt;
+        &lt;!&ndash;&lt;!&ndash; 前缀 &ndash;&gt;
         <property name="prefix" value="/WEB-INF/jsp/"/>
         &lt;!&ndash; 后缀 &ndash;&gt;
-        <property name="suffix" value=".jsp"/>-->
-        <!-- 文件上传 -->
+        <property name="suffix" value=".jsp"/>&ndash;&gt;
+        &lt;!&ndash; 文件上传 &ndash;&gt;
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-    </bean>
+    </bean>-->
 
 
     <!-- 配置 拦截器 -->
@@ -62,4 +62,56 @@
             <bean class="com.forward.utils.HandlerInterceptorImplUtils"/>
         </mvc:interceptor>
     </mvc:interceptors>-->
+
+    <!-- 注解映射器，适配器 -->
+    <mvc:annotation-driven >
+        <mvc:message-converters register-defaults="true">
+            <!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
+            <!-- FastJson -->
+            <bean id="fastJsonHttpMessageConverter"
+                  class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <!-- 这里顺序不能反，一定先写text/html,不然ie下出现下载提示 -->
+                        <value>text/html;charset=UTF-8</value>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+                <property name="features">
+                    <array value-type="com.alibaba.fastjson.serializer.SerializerFeature">
+                        <!-- 避免循环引用 -->
+                        <value>DisableCircularReferenceDetect</value>
+                        <!-- 是否输出值为null的字段 -->
+                        <value>WriteMapNullValue</value>
+                        <!-- 数值字段如果为null,输出为0,而非null -->
+                        <value>WriteNullNumberAsZero</value>
+                        <!-- 字符类型字段如果为null,输出为"",而非null  -->
+                        <value>WriteNullStringAsEmpty</value>
+                        <!-- List字段如果为null,输出为[],而非null -->
+                        <value>WriteNullListAsEmpty</value>
+                        <!-- Boolean字段如果为null,输出为false,而非null -->
+                        <value>WriteNullBooleanAsFalse</value>
+                    </array>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <!-- 资源映射 -->
+    <mvc:resources location="/resources/" mapping="/resources/**" />
+
+    <!-- 视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--<property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="suffix" value=".jsp" />-->
+    </bean>
+
+    <!-- 定义文件上传解析器 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 设定默认编码 -->
+        <property name="defaultEncoding" value="UTF-8"/>
+        <!-- 设定文件上传的最大值5MB，5*1024*1024 -->
+        <property name="maxUploadSize" value="5242880"/>
+    </bean>
 </beans>

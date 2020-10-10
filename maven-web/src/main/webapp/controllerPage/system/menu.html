@@ -8,10 +8,10 @@
 <div class="container">
     <div class="row">
         <div class="well form-inline">
-            <input type="button"  value="添加同级" class="form-control btn-info"/>
+            <input type="button" id="system_menu_add" value="添加同级" class="form-control btn-info"/>
             <input type="button" id="system_menu_addChild" value="添加子级" class="disabled form-control btn-info"/>
-            <input type="button" value="修改" class="form-control btn-info"/>
-            <input type="button" value="删除" class="form-control btn-danger"/>
+            <input type="button" id="system_menu_update" value="修改" class="form-control btn-info"/>
+            <input type="button" id="system_menu_delete" value="删除" class="form-control btn-danger"/>
         </div>
     </div>
 
@@ -23,25 +23,78 @@
     $(function () {
         let headUrl = "controllerPage/system/";
 
-        let treeData;
-        $.ajax({
-            url: headUrl + "menu_treeView.json",
-            async: false,
-            success: function (data) {
-                treeData = data;
-            }
-        })
         let treeViewId = "#system_menu_treeView";
-        $(treeViewId).treeview({
-            data: treeData,
-            onNodeSelected: function (event, node) {
-                if(!isNaN(node.parentId)){
-                    $("#system_menu_addChild").addClass("disabled").css("cursor","not-allowed");
-                }else{
-                    $("#system_menu_addChild").removeClass("disabled").css("cursor","pointer");
+        loadTreeView();
+
+        function loadTreeView() {
+            let treeData;
+            $.ajax({
+                url: "systemMenu/queryAll",
+                async: false,
+                success: function (data) {
+                    treeData = data;
                 }
+            })
+            $(treeViewId).treeview({
+                data: treeData,
+                showTags: true,
+                onNodeSelected: function (event, node) {
+
+                    if (/(添加|修改|删除|-)+/.test(node.text)) {
+                        $("#system_menu_addChild").addClass("disabled").css("cursor", "not-allowed");
+                    } else {
+                        $("#system_menu_addChild").removeClass("disabled").css("cursor", "pointer");
+                    }
+                }
+            })
+        }
+
+        let node;
+        $("#system_menu_add").click(function () {
+            if (isSelectedTreeView()) {
+                node = $(treeViewId).treeview("getSelected")[0];
+                myDialogModal("添加菜单", headUrl + "menuJsp/add.jsp?parentIds=" + node.parentIds);
             }
         })
+
+        $("#system_menu_addChild").click(function () {
+            if(myDisabledButton(this))return
+            if (isSelectedTreeView()) {
+                node = $(treeViewId).treeview("getSelected")[0];
+                //获取子的节点的 parentIds
+                myDialogModal("添加菜单", headUrl + "menuJsp/add.jsp?parentIds=" + node.id);
+            }
+        })
+        $("#system_menu_update").click(function () {
+            if (isSelectedTreeView()) {
+                node = $(treeViewId).treeview("getSelected")[0];
+                myDialogModal("修改菜单", headUrl + "menuJsp/upate.jsp?id=" + node.id);
+            }
+        })
+        $("#system_menu_delete").click(function () {
+            if (isSelectedTreeView()) {
+                node = $(treeViewId).treeview("getSelected")[0];
+                myConfirm("删除提示", "是否要删除菜单: " + node.text, function (t) {
+                    $.ajax({
+                        url: 'systemMenu/deleteMenuId',
+                        data: {id: node.id},
+                        dataType: 'json',
+                        success: function (data) {
+                            myAlert("删除提示", "删除" + data ? '成功' : '失败' + "!")
+                        }
+                    })
+                });
+            }
+        })
+
+        function isSelectedTreeView() {
+            node = $(treeViewId).treeview("getSelected");
+            if (node.length === 0) {
+                myAlert("提示信息:", "请选择菜单！！！")
+                return false;
+            }
+            return true;
+        }
     })
 
 </script>

@@ -9,4 +9,22 @@
         SELECT DISTINCT menuId FROM system_role_menu WHERE roleId in(
             SELECT roleId FROM system_staff_role WHERE staffId=#{id})
     </select>
+
+    <!-- List<Integer> selectMenuRoleId(int roleId); -->
+    <select id="selectMenuRoleId" parameterType="int" resultType="Integer">
+        select menuId from system_role_menu where roleId = #{roleId};
+    </select>
+
+    <!--  int deleteRoleMenuRoleId(int roleId); -->
+    <delete id="deleteRoleMenuRoleId" parameterType="int">
+        delete from system_role_menu where roleId=#{id};
+    </delete>
+
+    <!-- int insertBath(@Param("roleId") int roleId, @Param("menuIds") int[] menuIds); -->
+    <insert id="insertBath">
+        insert into system_role_menu (roleId,menuId) values
+        <foreach collection="menuIds" item="menuId" open="(" separator="),(" close=")">
+            #{roleId},#{menuId}
+        </foreach>
+    </insert>
 </mapper>

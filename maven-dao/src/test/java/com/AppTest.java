@@ -22,7 +22,9 @@ public class AppTest {
 
     @Test
     public void test1() throws IOException {
-         List list=context.getBean(SystemMenuDao.class).selectMenuId(0, Arrays.asList(1,2,3));
+        SystemMenu systemMenu=new SystemMenu();
+        systemMenu.setText("测试");
+        int list = context.getBean(SystemMenuDao.class).insert(systemMenu);
         System.out.println(list);
     }
 }
