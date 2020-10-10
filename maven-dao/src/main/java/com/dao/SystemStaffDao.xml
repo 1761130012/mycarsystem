@@ -3,5 +3,19 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dao.SystemStaffDao">
+    <sql id="allFieldSql">
+        id,name,pwd,phone,identity_card ,time
+    </sql>
 
+    <!-- IPage<SystemStaff> selectPageVo(@Param("page") Page<SystemStaff> page, @Param("staff")SystemStaff staff); -->
+    <select id="selectPageVo" resultType="SystemStaff">
+        select <include refid="allFieldSql"/> from system_staff
+        <where>
+            <if test="staff !=null">
+                <if test="staff.id !=null">and id = #{staff.id}</if>
+                <if test="staff.name !=null">and name like concat('%',#{staff.name},'%')</if>
+                <if test="staff.phone !=null">and phone like concat('%',#{staff.phone},'%')</if>
+            </if>
+        </where>
+    </select>
 </mapper>

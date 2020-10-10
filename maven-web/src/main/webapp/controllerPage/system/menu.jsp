@@ -1,17 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
+<%--
+  Created by IntelliJ IDEA.
+  User: LLY
+  Date: 2020-10-10
+  Time: 23:44
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>菜单管理</title>
+    <title>Title</title>
 </head>
 <body>
 <div class="container">
     <div class="row">
-        <div class="well form-inline">
-            <input type="button" id="system_menu_add" value="添加同级" class="form-control btn-info"/>
-            <input type="button" id="system_menu_addChild" value="添加子级" class="disabled form-control btn-info"/>
-            <input type="button" id="system_menu_update" value="修改" class="form-control btn-info"/>
-            <input type="button" id="system_menu_delete" value="删除" class="form-control btn-danger"/>
+        <div class="well">
+            <input type="button" id="system_menu_add" value="添加同级" data-discern-code="add"
+                   class="disabled btn btn-info"/>
+            <input type="button" id="system_menu_addChild" value="添加子级" data-discern-code="standbyOne"
+                   class="disabled btn btn-info"/>
+            <input type="button" id="system_menu_update" value="修改" data-discern-code="update"
+                   class="disabled btn btn-info"/>
+            <input type="button" id="system_menu_delete" value="删除" data-discern-code="delete"
+                   class="disabled btn btn-danger"/>
         </div>
     </div>
 
@@ -21,12 +31,17 @@
 </div>
 <script type="text/javascript">
     $(function () {
+        let treeViewId = "#system_menu_treeView";
         let headUrl = "controllerPage/system/";
 
-        let treeViewId = "#system_menu_treeView";
-        loadTreeView();
+        init();
+        function init() {
+            let tabId = "${param.tabId}";
+            removeClassDisabledButton(tabId, ["#system_menu_add",
+                "#system_menu_addChild",
+                "#system_menu_update",
+                "#system_menu_delete"]);
 
-        function loadTreeView() {
             let treeData;
             $.ajax({
                 url: "systemMenu/queryAll",
@@ -58,7 +73,7 @@
         })
 
         $("#system_menu_addChild").click(function () {
-            if(myDisabledButton(this))return
+            if (myDisabledButton(this)) return
             if (isSelectedTreeView()) {
                 node = $(treeViewId).treeview("getSelected")[0];
                 //获取子的节点的 parentIds

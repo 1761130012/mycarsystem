@@ -1,5 +1,7 @@
 package com;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dao.SystemMenuDao;
 import com.dao.SystemRoleDao;
 import com.dao.SystemStaffDao;
@@ -22,9 +24,10 @@ public class AppTest {
 
     @Test
     public void test1() throws IOException {
-        SystemMenu systemMenu=new SystemMenu();
-        systemMenu.setText("测试");
-        int list = context.getBean(SystemMenuDao.class).insert(systemMenu);
-        System.out.println(list);
+       SystemMenu menu= new SystemMenu();
+       menu.setText("-");
+        IPage<SystemMenu> iPage=context.getBean(SystemMenuDao.class).selectPageVo(new Page<>(2,2),menu);
+        System.out.println(iPage.getTotal());
     }
+
 }

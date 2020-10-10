@@ -10,6 +10,7 @@ import java.util.List;
 public interface SystemRoleDao extends BaseMapper<SystemRole> {
     /**
      * 根据 员工 id 查询 所归属的 菜单id 不重复
+     *
      * @param staffId 员工 id
      * @return
      */
@@ -26,4 +27,6 @@ public interface SystemRoleDao extends BaseMapper<SystemRole> {
     int deleteRoleMenuRoleId(int roleId);
 
     int insertBath(@Param("roleId") int roleId, @Param("menuIds") Integer[] menuIds);
+
+    List<Integer> selectListMenuIdStaffIdMenuId(@Param("staffId") String staffId,@Param("menuId") Integer menuId);
 }

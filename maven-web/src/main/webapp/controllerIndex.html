@@ -124,7 +124,7 @@
         return array;
     }
 
-    function myDisabledButton(id,e) {
+    function myDisabledButton(id, e) {
         if ($(id).attr("class").indexOf("disabled") !== -1) {
             return true;
         }
@@ -134,9 +134,25 @@
     /**
      * 增改删 按钮 进行 添加 识别码
      * @param tabId 选项卡 id 代表 菜单的 id
+     * @param id集合
      */
-    function addCRUDButtonCode(tabId, createId) {
-
+    function removeClassDisabledButton(tabId, arrayId) {
+        tabId=parseInt(tabId);
+        $.ajax({
+            url: 'systemRole/queryStaffMenuIdCode',
+            data: {menuId: tabId},
+            dataType: 'json',
+            success: function (data) {
+                //data 是 tabId 的 子菜单 中 有的 识别码
+                $.each(arrayId, function () {
+                    for (let i = 0; i < data.length; i++) {
+                        if ($(this+"").attr("data-discern-code") === data[i]) {
+                            $(this+"").removeClass("disabled");
+                        }
+                    }
+                })
+            }
+        })
     }
 </script>
 </body>

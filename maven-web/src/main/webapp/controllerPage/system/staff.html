@@ -3,20 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>员工管理</title>
-    <!--<script src="../../resources/js/jquery.min.js"></script>
-    <script src="../../resources/js/bootstrap.js"></script>
-    <script src="../../resources/js/bootstrap-table.js"></script>
-    <script src="../../resources/js/bootstrap-table-zh-CN.min.js"></script>
-    <link rel="stylesheet" href="../../resources/css/bootstrap.css">
-    <link rel="stylesheet" href="../../resources/css/bootstrap-table.css">-->
 </head>
 <body>
 <div class="container">
     <div class="row" style="margin-top: 10px">
         <div id="system_staff_toolbar">
-            <input type="button" class="btn btn-info" id='system_staff_add' value="添加"/>
-            <input type='button' class='btn btn-info' value='修改'/>
-            <input type='button' class='btn btn-danger' value='删除'/>
+            <input type="button" id='system_staff_add' data-discern-code="add" class='disabled btn btn-info' value="添加"/>
+            <input type='button' id='system_staff_update' data-discern-code="update" class='disabled btn btn-info' value='修改'/>
+            <input type='button' id='system_staff_delete' data-discern-code="delete" class='disabled btn btn-danger' value='删除'/>
         </div>
         <table id="system_staff_table"></table>
     </div>
@@ -27,30 +21,38 @@
 
         let staff_table = "#system_staff_table";
         $(staff_table).bootstrapTable({
-            url: headUrl + "staff_table.json",
+            url: "systemStaff/queryPageVo",
+            method: 'get',
             clickToSelect: true,
             toolbar: "#system_staff_toolbar",//自定义工具栏
             pagination: true,
             showRefresh: true,//刷新
-            paginationLoop: true,
             pageNumber: 1,
-            pageSize: 3,
-            pageList: [3, 5, 6],
+            pageSize: 2,
+            pageList: [2, 6, 9],
             paginationHAlign: "left",
             paginationPreText: "<",
             paginationNextText: ">",
-            paginationVAlign:'bottom',
+            sidePagination: "server",
+            queryParams: function (params) {//上传服务器的参数
+                return {//如果是在服务器端实现分页，limit、offset这两个参数是必须的
+                    rows: params.limit, // 每页显示数量
+                    page: (params.offset / params.limit) + 1, // SQL语句起始索引
+                };
+            },
             columns: [
                 {checkbox: true},
-                {field: "id", title: "编号"},
-                {field: "name", title: "名称"},
-                {field: "phone", title: "手机号"}
+                {field: "id", title: "员工账户"},
+                {field: "name", title: "员工名称"},
+                {field: "pwd", title: "员工密码"},
+                {field: "phone", title: "员工电话"},
+                {field: "identityCard", title: "员工身份证"},
+                {field: "time", title: "入职时间"}
             ]
         })
 
         $("#system_staff_add").click(function () {
-            console.log("dsf")
-            myDialogModal("添加角色",headUrl+"staff/add.html");
+            myDialogModal("添加角色", headUrl + "staff/add.html");
         })
     })
 </script>

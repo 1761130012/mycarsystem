@@ -27,4 +27,14 @@
             #{roleId},#{menuId}
         </foreach>
     </insert>
+
+
+
+    <!--List<Integer> selectListMenuIdStaffIdMenuId(@Param("staffId") String staffId,@Param("menuId") Integer menuId);-->
+    <select id="selectListMenuIdStaffIdMenuId" resultType="Integer">
+        SELECT DISTINCT a.menuId FROM system_role_menu a
+         inner join system_menu b
+         WHERE b.parentIds=#{menuId} and roleId in(
+            SELECT roleId FROM system_staff_role WHERE staffId=#{staffId})
+    </select>
 </mapper>

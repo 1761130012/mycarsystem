@@ -8,4 +8,6 @@ public interface SystemRoleService {
     List<SystemRole> queryAllRole();
 
     boolean updatePowerRoleId(int roleId,Integer[] menuIds);
+
+    List<String> queryStaffMenuIdCode(Integer menuId,String staffId);
 }

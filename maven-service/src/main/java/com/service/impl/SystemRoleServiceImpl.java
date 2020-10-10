@@ -1,5 +1,6 @@
 package com.service.impl;
 
+import com.dao.SystemMenuDao;
 import com.dao.SystemRoleDao;
 import com.service.SystemRoleService;
 import com.vo.SystemRole;
@@ -12,6 +13,8 @@ import java.util.List;
 public class SystemRoleServiceImpl implements SystemRoleService {
     @Autowired
     private SystemRoleDao roleDao;
+    @Autowired
+    private SystemMenuDao menuDao;
 
     @Override
     public List<SystemRole> queryAllRole() {
@@ -24,5 +27,11 @@ public class SystemRoleServiceImpl implements SystemRoleService {
         roleDao.deleteRoleMenuRoleId(roleId);
         //进行 添加
         return roleDao.insertBath(roleId, menuIds) > 0;
+    }
+
+    @Override
+    public List<String> queryStaffMenuIdCode(Integer menuId, String staffId) {
+        List<Integer> menuIds = roleDao.selectListMenuIdStaffIdMenuId(staffId,menuId);
+        return menuDao.selectListMenuIdCode(menuId, menuIds);
     }
 }

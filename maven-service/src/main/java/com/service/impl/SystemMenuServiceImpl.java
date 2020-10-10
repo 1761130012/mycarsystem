@@ -1,9 +1,11 @@
 package com.service.impl;
 
+import com.dao.SystemMenuCodeDao;
 import com.dao.SystemMenuDao;
 import com.dao.SystemRoleDao;
 import com.service.SystemMenuService;
 import com.vo.SystemMenu;
+import com.vo.SystemMenuCode;
 import com.vo.SystemMenuState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,8 @@ public class SystemMenuServiceImpl implements SystemMenuService {
     private SystemMenuDao menuDao;
     @Autowired
     private SystemRoleDao roleDao;
+    @Autowired
+    private SystemMenuCodeDao codeDao;
 
     @Override
     public List<SystemMenu> queryListMenuStaff(String staffId) {
@@ -110,5 +114,10 @@ public class SystemMenuServiceImpl implements SystemMenuService {
     @Override
     public boolean deleteMenuId(int id) {
         return menuDao.deleteById(id) > 0;
+    }
+
+    @Override
+    public List<SystemMenuCode> queryAllCode() {
+        return codeDao.selectList(null);
     }
 }

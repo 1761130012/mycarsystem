@@ -4,12 +4,14 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @TableName("system_staff")
-public class SystemStaff {
+public class SystemStaff extends FormatTime {
     @TableId
     private String id;//员工账户
     private String name;//员工名称

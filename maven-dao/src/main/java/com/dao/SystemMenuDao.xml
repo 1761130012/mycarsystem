@@ -4,24 +4,46 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dao.SystemMenuDao">
     <sql id="allFiledId">
-        id,text,url,parentIds
+        id,text,url,discernCode,parentIds
     </sql>
     <!-- List<SystemMenu> selectMenuId(@Param("parentId") , @Param("menuId")); -->
     <select id="selectMenuId" resultType="SystemMenu">
-        SELECT <include refid="allFiledId"/> FROM system_menu WHERE parentIds=#{parentId} and
+        SELECT
+        <include refid="allFiledId"/>
+        FROM system_menu WHERE parentIds=#{parentId} and
         id in
-        <foreach collection="menuId" item="id" open="(" separator="," close=")" >
+        <foreach collection="menuId" item="id" open="(" separator="," close=")">
             #{id}
         </foreach>
     </select>
 
     <!-- List<SystemMenu> selectMenuParentIdId(int parentId); -->
     <select id="selectMenuParentIdId" parameterType="int" resultType="SystemMenu">
-        SELECT <include refid="allFiledId"/> FROM system_menu WHERE parentIds=#{parentId}
+        SELECT
+        <include refid="allFiledId"/>
+        FROM system_menu WHERE parentIds=#{parentId}
     </select>
 
     <!-- String selectTitleParentIds(int parentIds); -->
     <select id="selectTitleParentIds" parameterType="int" resultType="String">
         select text from system_menu where id=#{id};
+    </select>
+
+    <!-- IPage<SystemMenu> selectPageVo(@Param("page") Page<?> page,@Param("menu") SystemMenu menu); -->
+    <select id="selectPageVo" resultType="SystemMenu">
+        SELECT
+        <include refid="allFiledId"/>
+        FROM system_menu
+        <where>
+            <if test="menu !=null and menu.text !=null">and text like concat('%',#{menu.text},'%')</if>
+        </where>
+    </select>
+
+    <!-- List<String> selectListMenuIdCode(@Param("parentId") int parentId,@Param("menuIds") List<Integer> menuIds); -->
+    <select id="selectListMenuIdCode" resultType="String">
+        select discernCode from system_menu where parentIds=#{parentId} and id in
+        <foreach collection="menuIds" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
     </select>
 </mapper>

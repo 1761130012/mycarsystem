@@ -18,7 +18,7 @@
         closableTab.addTab({
             'id': id,
             'name': name,
-            'url': url,
+            'url': url===undefined ||url===''?url:url+"?tabId="+id,
             'closable': closable === undefined,
         });
     }

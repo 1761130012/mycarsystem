@@ -2,6 +2,7 @@ package com.controller;
 
 import com.service.SystemMenuService;
 import com.vo.SystemMenu;
+import com.vo.SystemMenuCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -70,5 +71,11 @@ public class SystemMenuController {
     @ResponseBody
     public boolean deleteMenuId(int id){
         return systemMenuService.deleteMenuId(id);
+    }
+
+    @RequestMapping("/queryAllCode")
+    @ResponseBody
+    public List<SystemMenuCode> queryAllCode(){
+        return systemMenuService.queryAllCode();
     }
 }

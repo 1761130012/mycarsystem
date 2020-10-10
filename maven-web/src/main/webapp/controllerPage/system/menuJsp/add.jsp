@@ -32,7 +32,14 @@
         </div>
     </div>
     <div class="form-group">
-        <div class="col-md-4 col-md-offset-4 "><input type="button" id="system_menu_add_submit" class="btn btn-info form-control" value="添加"/></div>
+        <label class="col-md-2 text-center">识别码：</label>
+        <div class="col-md-10">
+            <select id="system_menu_add_discernCode" name="discernCode" class="form-control"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-4 col-md-offset-4 "><input type="button" id="system_menu_add_submit"
+                                                      class="btn btn-info form-control" value="添加"/></div>
     </div>
 </form>
 <script type="text/javascript">
@@ -40,33 +47,45 @@
         init();
 
         function init() {
-            //获取 父id
+            //获取 父id 设置 参数
             let parentId = "${param.parentIds}";
             let title;
             if (0 === parseInt(parentId)) {
-                title="无父菜单";
+                title = "无父菜单";
             } else {
                 $.ajax({
                     url: 'systemMenu/queryMenuTitleParentId',
                     data: {id: parentId},
-                    async:false,
-                    dataType:"json",
+                    async: false,
+                    dataType: "json",
                     success: function (data) {
-                        title=data;
+                        title = data;
                     }
                 })
             }
             $("#system_menu_add_parentTitle").val(title);
             $("#system_menu_add_parentIds").val(parentId);
+
+            //加载 识别码
+            $.ajax({
+                url: 'systemMenu/queryAllCode',
+                dataType: 'json',
+                success: function (data) {
+                    let discernCode=$("#system_menu_add_discernCode");
+                    $.each(data,function () {
+                        discernCode.append("<option value='"+this.code+"'>"+this.name+"</option>");
+                    });
+                }
+            })
         }
 
         $("#system_menu_add_submit").click(function () {
-            let array=myFromSubmit("#system_menu_add_form");
+            let array = myFromSubmit("#system_menu_add_form");
             $.ajax({
-                url:'systemMenu/insertMenu',
-                data:array,
-                success:function (data) {
-                    myAlert("添加菜单信息","添加菜单"+eval(data)?'成功':'失败'+"!");
+                url: 'systemMenu/insertMenu',
+                data: array,
+                success: function (data) {
+                    myAlert("添加菜单信息", "添加菜单" + eval(data) ? '成功' : '失败' + "!");
                 }
             })
         })

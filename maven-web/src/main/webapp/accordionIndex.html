@@ -22,7 +22,7 @@
 
         $.ajax({
             url: 'systemMenu/queryListMenuStaff',
-            async: false,//是否异步
+            async: true,//是否异步
             success: function (data) {
                 addAccordion(JSON.parse(data));
             }

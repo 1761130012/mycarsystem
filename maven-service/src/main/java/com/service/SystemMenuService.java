@@ -1,6 +1,7 @@
 package com.service;
 
 import com.vo.SystemMenu;
+import com.vo.SystemMenuCode;
 
 import java.util.List;
 
@@ -20,4 +21,6 @@ public interface SystemMenuService {
     SystemMenu queryMenuId(int id);
 
     boolean deleteMenuId(int id);
+
+    List<SystemMenuCode> queryAllCode();
 }

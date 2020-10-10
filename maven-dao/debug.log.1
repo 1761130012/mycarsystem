@@ -1,18 +1,27 @@
-2020-10-10 08:57:19  [ main:0 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
-2020-10-10 08:57:19  [ main:640 ] - [ INFO ]  {dataSource-1} inited
-2020-10-10 14:11:42  [ main:0 ] - [ DEBUG ]  Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
-2020-10-10 14:11:43  [ main:828 ] - [ DEBUG ]  Creating a new SqlSession
-2020-10-10 14:11:43  [ main:836 ] - [ DEBUG ]  SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5812f68b] was not registered for synchronization because synchronization is not active
-2020-10-10 14:11:43  [ main:924 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
-2020-10-10 14:11:43  [ main:1557 ] - [ INFO ]  {dataSource-1} inited
-2020-10-10 14:11:43  [ main:1560 ] - [ DEBUG ]  JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@27a5328c] will not be managed by Spring
-2020-10-10 14:11:43  [ main:1569 ] - [ DEBUG ]  ==>  Preparing: SELECT id,text,url,parentIds FROM system_menu WHERE parentIds=? and id in ( ? , ? , ? , ? , ? )
-2020-10-10 14:11:43  [ main:1592 ] - [ DEBUG ]  ==> Parameters: 0(Integer), 1(Integer), 2(Integer), 3(Integer), 4(Integer), 5(Integer)
-2020-10-10 14:11:43  [ main:1615 ] - [ DEBUG ]  <==      Total: 4
-2020-10-10 14:11:43  [ main:1617 ] - [ DEBUG ]  Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5812f68b]
-2020-10-10 15:56:59  [ main:0 ] - [ DEBUG ]  Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
-2020-10-10 15:56:59  [ main:812 ] - [ DEBUG ]  Creating a new SqlSession
-2020-10-10 15:56:59  [ main:818 ] - [ DEBUG ]  SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3c7c886c] was not registered for synchronization because synchronization is not active
-2020-10-10 15:56:59  [ main:907 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
-2020-10-10 15:57:00  [ main:1557 ] - [ INFO ]  {dataSource-1} inited
-2020-10-10 15:57:00  [ main:1561 ] - [ DEBUG ]  JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@6c345c5f] will not be managed by Spring
+2020-10-10 21:06:07  [ main:898 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
+2020-10-10 21:06:08  [ main:1482 ] - [ INFO ]  {dataSource-1} inited
+2020-10-10 21:06:08  [ main:1486 ] - [ DEBUG ]  JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@25bcd0c7] will not be managed by Spring
+2020-10-10 21:06:08  [ main:1494 ] - [ DEBUG ]  JsqlParserCountOptimize sql=SELECT
+         
+        id,text,url,parentIds
+     
+        FROM system_menu
+         WHERE  text like concat('%',?,'%')
+2020-10-10 21:06:08  [ main:1527 ] - [ DEBUG ]  ==>  Preparing: SELECT COUNT(1) FROM system_menu WHERE text LIKE concat('%', ?, '%')
+2020-10-10 21:06:08  [ main:1549 ] - [ DEBUG ]  ==> Parameters: -(String)
+2020-10-10 21:06:08  [ main:1572 ] - [ DEBUG ]  ==>  Preparing: SELECT id,text,url,parentIds FROM system_menu WHERE text like concat('%',?,'%') LIMIT ?,?
+2020-10-10 21:06:08  [ main:1573 ] - [ DEBUG ]  ==> Parameters: -(String), 2(Long), 2(Long)
+2020-10-10 21:06:08  [ main:1579 ] - [ DEBUG ]  <==      Total: 2
+2020-10-10 21:06:08  [ main:1580 ] - [ DEBUG ]  Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6b88ca8c]
+2020-10-10 21:08:33  [ main:0 ] - [ DEBUG ]  Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
+2020-10-10 21:08:34  [ main:741 ] - [ DEBUG ]  Creating a new SqlSession
+2020-10-10 21:08:34  [ main:750 ] - [ DEBUG ]  SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6b88ca8c] was not registered for synchronization because synchronization is not active
+2020-10-10 21:08:34  [ main:835 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
+2020-10-10 21:08:35  [ main:1439 ] - [ INFO ]  {dataSource-1} inited
+2020-10-10 21:08:35  [ main:1443 ] - [ DEBUG ]  JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@25bcd0c7] will not be managed by Spring
+2020-10-10 21:08:35  [ main:1451 ] - [ DEBUG ]  JsqlParserCountOptimize sql=SELECT
+         
+        id,text,url,parentIds
+     
+        FROM system_menu
+         WHERE  text like concat('%',?,'%')

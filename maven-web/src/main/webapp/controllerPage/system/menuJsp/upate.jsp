@@ -26,35 +26,55 @@
         </div>
     </div>
     <div class="form-group">
-        <div class="col-md-4 col-md-offset-4 "><input type="button" id="system_menu_update_submit" class="btn btn-info form-control" value="修改"/></div>
+        <label class="col-md-2 text-center">识别码：</label>
+        <div class="col-md-10">
+            <select id="system_menu_update_discernCode" name="discernCode" class="form-control"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-4 col-md-offset-4 "><input type="button" id="system_menu_update_submit"
+                                                      class="btn btn-info form-control" value="修改"/></div>
     </div>
 </form>
 <script type="text/javascript">
     $(function () {
-        let form="#system_menu_update_form";
+        let form = "#system_menu_update_form";
         init();
+
         function init() {
             //获取 父id
             let id = "${param.id}";
-                $.ajax({
-                    url: 'systemMenu/queryMenuId',
-                    data: {id: id},
-                    async:false,
-                    dataType:"json",
-                    success: function (data) {
-                        console.log(data)
-                        $(form).form("load",data);
-                    }
-                })
+
+            //加载 识别码
+            $.ajax({
+                url: 'systemMenu/queryAllCode',
+                async: false,
+                dataType: 'json',
+                success: function (data) {
+                    let discernCode = $("#system_menu_update_discernCode");
+                    $.each(data, function () {
+                        discernCode.append("<option value='" + this.code + "'>" + this.name + "</option>");
+                    });
+                }
+            })
+            $.ajax({
+                url: 'systemMenu/queryMenuId',
+                data: {id: id},
+                async: false,
+                dataType: "json",
+                success: function (data) {
+                    $(form).form("load", data);
+                }
+            })
         }
 
         $("#system_menu_update_submit").click(function () {
-            let array=myFromSubmit(form);
+            let array = myFromSubmit(form);
             $.ajax({
-                url:'systemMenu/updateMenu',
-                data:array,
-                success:function (data) {
-                    myAlert("添加菜单信息","添加菜单"+eval(data)?'成功':'失败'+"!");
+                url: 'systemMenu/updateMenu',
+                data: array,
+                success: function (data) {
+                    myAlert("添加菜单信息", "添加菜单" + eval(data) ? '成功' : '失败' + "!");
                 }
             })
         })
