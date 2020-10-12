@@ -5,6 +5,7 @@
     <title>权限管理</title>
 </head>
 <body>
+<div class="container">
     <div class="row well">
         <div class="col-md-1"><input type="button" value="授权" class="form-control" id="system_power_submit"/></div>
     </div>
@@ -14,11 +15,12 @@
             <table id="system_power_roleTable"></table>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-6">
             <!--<div style="overflow:scroll;height:680px;float:left">-->
             <div id="system_power_treeView"></div>
         </div>
     </div>
+</div>
 <script type="text/javascript">
     $(function () {
         let addressUrl = "controllerPage/system/";
@@ -52,7 +54,7 @@
             $.ajax({
                 url: 'systemRole/updatePowerRoleId',
                 type: 'post',
-                contentType:'application/json',
+                contentType: 'application/json',
                 data: JSON.stringify({
                     id: roleId,
                     menuIds: arrayIds

@@ -2,9 +2,12 @@ package com;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.dao.InfoUserDao;
 import com.dao.SystemMenuDao;
 import com.dao.SystemRoleDao;
 import com.dao.SystemStaffDao;
+import com.vo.InfoUser;
+import com.vo.PageVo;
 import com.vo.SystemMenu;
 import com.vo.SystemStaff;
 import org.junit.Test;
@@ -24,10 +27,8 @@ public class AppTest {
 
     @Test
     public void test1() throws IOException {
-       SystemMenu menu= new SystemMenu();
-       menu.setText("-");
-        IPage<SystemMenu> iPage=context.getBean(SystemMenuDao.class).selectPageVo(new Page<>(2,2),menu);
-        System.out.println(iPage.getTotal());
+        PageVo<InfoUser> iPage = context.getBean(InfoUserDao.class).selectPageVo(new PageVo<InfoUser>(1, 2), null);
+        System.out.println(iPage.getRows());
     }
 
 }

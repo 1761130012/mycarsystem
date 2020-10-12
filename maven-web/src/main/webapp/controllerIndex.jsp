@@ -1,7 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+<%--
+  Created by IntelliJ IDEA.
+  User: LLY
+  Date: 2020-10-12
+  Time: 8:44
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>后台页面</title>
     <link href="resources/css/bootstrap.css" rel="stylesheet"/>
     <link href="resources/css/bootstrap-treeview.min.css" rel="stylesheet"/>
@@ -115,6 +121,13 @@
         })
     }
 
+    //隐藏
+    function myDialogModalHide() {
+        bootbox.dialog({
+            show: false
+        })
+    }
+
     function myFromSubmit(formId) {
         let serializeArray = $(formId).serializeArray();
         let array = {};
@@ -124,11 +137,8 @@
         return array;
     }
 
-    function myDisabledButton(id, e) {
-        if ($(id).attr("class").indexOf("disabled") !== -1) {
-            return true;
-        }
-        return false;
+    function myDisabledButton(id) {
+        return $(id).attr("class").indexOf("disabled") === -1;
     }
 
     /**
@@ -137,7 +147,7 @@
      * @param id集合
      */
     function removeClassDisabledButton(tabId, arrayId) {
-        tabId=parseInt(tabId);
+        tabId = parseInt(tabId);
         $.ajax({
             url: 'systemRole/queryStaffMenuIdCode',
             data: {menuId: tabId},
@@ -146,8 +156,8 @@
                 //data 是 tabId 的 子菜单 中 有的 识别码
                 $.each(arrayId, function () {
                     for (let i = 0; i < data.length; i++) {
-                        if ($(this+"").attr("data-discern-code") === data[i]) {
-                            $(this+"").removeClass("disabled");
+                        if ($(this + "").attr("data-discern-code") === data[i]) {
+                            $(this + "").removeClass("disabled");
                         }
                     }
                 })

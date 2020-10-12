@@ -28,8 +28,6 @@
         </foreach>
     </insert>
 
-
-
     <!--List<Integer> selectListMenuIdStaffIdMenuId(@Param("staffId") String staffId,@Param("menuId") Integer menuId);-->
     <select id="selectListMenuIdStaffIdMenuId" resultType="Integer">
         SELECT DISTINCT a.menuId FROM system_role_menu a
@@ -37,4 +35,22 @@
          WHERE b.parentIds=#{menuId} and roleId in(
             SELECT roleId FROM system_staff_role WHERE staffId=#{staffId})
     </select>
+
+    <!-- List<SystemRole> selectRoleStaffId(String staffId); -->
+    <select id="selectRoleStaffId" parameterType="String" resultType="Integer">
+        select roleId from system_staff_role where staffId=#{id};
+    </select>
+
+    <!-- int deleteStaffId(String staffId); -->
+    <delete id="deleteStaffId" parameterType="String">
+        delete from system_staff_role where staffId=#{staffId}
+    </delete>
+
+    <!-- int insertStaffRoleArrayStaffId(@Param("staffId") Integer staffId, @Param("roleIds") List<Integer> roleIds); -->
+    <insert id="insertStaffRoleArrayStaffId">
+        insert into system_staff_role (staffId,roleId) value
+        <foreach collection="roleIds" item="roleId" open="(" separator="),(" close=")" >
+            #{staffId},#{roleId}
+        </foreach>
+    </insert>
 </mapper>

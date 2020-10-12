@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -28,7 +27,7 @@ public class SystemRoleController {
         return roleService.queryAllRole();
     }
 
-    @RequestMapping(value = "/updatePowerRoleId")
+    @RequestMapping("/updatePowerRoleId")
     @ResponseBody
     public boolean updatePowerRoleId(@RequestBody SystemRole role) {
         return roleService.updatePowerRoleId(role.getId(), role.getMenuIds());
@@ -38,5 +37,47 @@ public class SystemRoleController {
     @ResponseBody
     public List<String> queryStaffMenuIdCode(Integer menuId, HttpServletRequest request) {
         return roleService.queryStaffMenuIdCode(menuId, (String) request.getSession().getAttribute("staffId"));
+    }
+
+    @RequestMapping("/queryAll")
+    @ResponseBody
+    public List<SystemRole> queryAll() {
+        return roleService.queryAll();
+    }
+
+    @RequestMapping("/insertRole")
+    @ResponseBody
+    public boolean insertRole(SystemRole role) {
+        return roleService.insertRole(role);
+    }
+
+    @RequestMapping("/queryRoleId")
+    @ResponseBody
+    public SystemRole queryRoleId(Integer id) {
+        return roleService.queryRoleId(id);
+    }
+
+    @RequestMapping("/updateRoleId")
+    @ResponseBody
+    public boolean updateRoleId(SystemRole role) {
+        return roleService.updateRoleId(role);
+    }
+
+    @RequestMapping("/queryAllRoleA")
+    @ResponseBody
+    public List<SystemRole> queryAllRoleA(@RequestParam(defaultValue = "0") String staffId) {
+        return roleService.queryAllRoleA(staffId);
+    }
+
+    @RequestMapping("/updateStaffRoleArrayStaffId")
+    @ResponseBody
+    public boolean updateStaffRoleArrayStaffId(@RequestBody SystemRole role) {
+        return roleService.updateStaffRoleArrayStaffId(role);
+    }
+
+    @RequestMapping("/deleteId")
+    @ResponseBody
+    public boolean deleteId(Integer id) {
+        return roleService.deleteId(id);
     }
 }

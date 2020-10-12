@@ -18,6 +18,8 @@ public class DateConvertUtil implements Converter<String, Date> {
 
     @Override
     public Date convert(String s) {
+        System.out.println("----------------");
+        System.out.println(s);
         try {
             return DateUtils.parseDate(s, parsePatterns);
         } catch (ParseException e) {

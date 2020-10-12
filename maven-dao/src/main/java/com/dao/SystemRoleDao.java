@@ -29,4 +29,10 @@ public interface SystemRoleDao extends BaseMapper<SystemRole> {
     int insertBath(@Param("roleId") int roleId, @Param("menuIds") Integer[] menuIds);
 
     List<Integer> selectListMenuIdStaffIdMenuId(@Param("staffId") String staffId,@Param("menuId") Integer menuId);
+
+    List<Integer> selectRoleStaffId(String staffId);
+
+    int insertStaffRoleArrayStaffId(@Param("staffId") String staffId, @Param("roleIds") List<Integer> roleIds);
+
+    int deleteStaffId(String staffId);
 }

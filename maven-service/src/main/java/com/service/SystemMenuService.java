@@ -12,7 +12,6 @@ public interface SystemMenuService {
 
     List<SystemMenu> queryAll(int parentId);
 
-    String queryMenuTitleParentId(int parentIds);
 
     boolean insertMenu(SystemMenu menu);
 
@@ -23,4 +22,6 @@ public interface SystemMenuService {
     boolean deleteMenuId(int id);
 
     List<SystemMenuCode> queryAllCode();
+
+    List<SystemMenu> queryMenuParentId(Integer id);
 }

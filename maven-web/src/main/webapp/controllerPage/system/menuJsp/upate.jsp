@@ -13,21 +13,21 @@
 <body>
 <form class="form-horizontal" id="system_menu_update_form">
     <div class="form-group">
-        <label class="col-md-2 text-center">菜单名：</label>
-        <div class="col-md-10">
+        <label class="col-md-3 text-center">菜单名：</label>
+        <div class="col-md-9">
             <input type="hidden" name="id">
             <input type="text" name="text" class="form-control">
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 text-center">URL：</label>
-        <div class="col-md-10">
+        <label class="col-md-3 text-center">URL：</label>
+        <div class="col-md-9">
             <input type="text" name="url" class="form-control">
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 text-center">识别码：</label>
-        <div class="col-md-10">
+        <label class="col-md-3 text-center">识别码：</label>
+        <div class="col-md-9">
             <select id="system_menu_update_discernCode" name="discernCode" class="form-control"></select>
         </div>
     </div>
@@ -45,7 +45,7 @@
             //获取 父id
             let id = "${param.id}";
 
-            //加载 识别码
+            //加载 识别码 下拉框
             $.ajax({
                 url: 'systemMenu/queryAllCode',
                 async: false,
@@ -57,15 +57,8 @@
                     });
                 }
             })
-            $.ajax({
-                url: 'systemMenu/queryMenuId',
-                data: {id: id},
-                async: false,
-                dataType: "json",
-                success: function (data) {
-                    $(form).form("load", data);
-                }
-            })
+
+            $(form).form("load","systemMenu/queryMenuId?id="+id);
         }
 
         $("#system_menu_update_submit").click(function () {

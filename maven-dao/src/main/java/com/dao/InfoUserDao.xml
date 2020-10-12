@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.InfoUserDao">
+    <sql id="allFieldSql">
+        id,pwd,name,code,car_code,time
+    </sql>
+    <!--PageVo<InfoUser> selectPageVo(@Param("pageVo") PageVo<InfoUser> pageVo, @Param("infoUser") InfoUser infoUser);-->
+    <select id="selectPageVo" resultType="InfoUser">
+        select <include refid="allFieldSql"/> from info_user
+    </select>
+</mapper>

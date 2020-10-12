@@ -12,21 +12,21 @@
 </head>
 <body>
 <div class="container">
-    <div class="row">
-        <div class="well">
-            <input type="button" id="system_menu_add" value="添加同级" data-discern-code="add"
-                   class="disabled btn btn-info"/>
-            <input type="button" id="system_menu_addChild" value="添加子级" data-discern-code="standbyOne"
-                   class="disabled btn btn-info"/>
-            <input type="button" id="system_menu_update" value="修改" data-discern-code="update"
-                   class="disabled btn btn-info"/>
-            <input type="button" id="system_menu_delete" value="删除" data-discern-code="delete"
-                   class="disabled btn btn-danger"/>
-        </div>
+    <div class="row well">
+        <input type="button" id="system_menu_add" value="添加同级" data-discern-code="add"
+               class="disabled btn btn-info"/>
+        <input type="button" id="system_menu_addChild" value="添加子级" data-discern-code="standbyOne"
+               class="disabled btn btn-info"/>
+        <input type="button" id="system_menu_update" value="修改" data-discern-code="update"
+               class="disabled btn btn-info"/>
+        <input type="button" id="system_menu_delete" value="删除" data-discern-code="delete"
+               class="disabled btn btn-danger"/>
     </div>
 
-    <div class="row" style="margin-top: -20px">
-        <div id="system_menu_treeView"></div>
+    <div class="row">
+        <div class="col-md-9">
+            <div id="system_menu_treeView"></div>
+        </div>
     </div>
 </div>
 <script type="text/javascript">
@@ -35,9 +35,9 @@
         let headUrl = "controllerPage/system/";
 
         init();
+
         function init() {
-            let tabId = "${param.tabId}";
-            removeClassDisabledButton(tabId, ["#system_menu_add",
+            removeClassDisabledButton("${param.tabId}", ["#system_menu_add",
                 "#system_menu_addChild",
                 "#system_menu_update",
                 "#system_menu_delete"]);
@@ -66,28 +66,27 @@
 
         let node;
         $("#system_menu_add").click(function () {
-            if (isSelectedTreeView()) {
+            if (isSelectedTreeView() && myDisabledButton(this)) {
                 node = $(treeViewId).treeview("getSelected")[0];
                 myDialogModal("添加菜单", headUrl + "menuJsp/add.jsp?parentIds=" + node.parentIds);
             }
         })
 
         $("#system_menu_addChild").click(function () {
-            if (myDisabledButton(this)) return
-            if (isSelectedTreeView()) {
+            if (isSelectedTreeView() && myDisabledButton(this)) {
                 node = $(treeViewId).treeview("getSelected")[0];
                 //获取子的节点的 parentIds
                 myDialogModal("添加菜单", headUrl + "menuJsp/add.jsp?parentIds=" + node.id);
             }
         })
         $("#system_menu_update").click(function () {
-            if (isSelectedTreeView()) {
+            if (isSelectedTreeView() && myDisabledButton(this)) {
                 node = $(treeViewId).treeview("getSelected")[0];
                 myDialogModal("修改菜单", headUrl + "menuJsp/upate.jsp?id=" + node.id);
             }
         })
         $("#system_menu_delete").click(function () {
-            if (isSelectedTreeView()) {
+            if (isSelectedTreeView() && myDisabledButton(this)) {
                 node = $(treeViewId).treeview("getSelected")[0];
                 myConfirm("删除提示", "是否要删除菜单: " + node.text, function (t) {
                     $.ajax({

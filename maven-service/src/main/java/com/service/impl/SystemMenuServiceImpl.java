@@ -91,10 +91,7 @@ public class SystemMenuServiceImpl implements SystemMenuService {
         return menus;
     }
 
-    @Override
-    public String queryMenuTitleParentId(int parentIds) {
-        return menuDao.selectTitleParentIds(parentIds);
-    }
+
 
     @Override
     public boolean insertMenu(SystemMenu menu) {
@@ -119,5 +116,10 @@ public class SystemMenuServiceImpl implements SystemMenuService {
     @Override
     public List<SystemMenuCode> queryAllCode() {
         return codeDao.selectList(null);
+    }
+
+    @Override
+    public List<SystemMenu> queryMenuParentId(Integer id) {
+        return menuDao.selectMenuParentId(id);
     }
 }

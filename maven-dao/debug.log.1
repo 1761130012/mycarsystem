@@ -1,27 +1,22 @@
-2020-10-10 21:06:07  [ main:898 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
-2020-10-10 21:06:08  [ main:1482 ] - [ INFO ]  {dataSource-1} inited
-2020-10-10 21:06:08  [ main:1486 ] - [ DEBUG ]  JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@25bcd0c7] will not be managed by Spring
-2020-10-10 21:06:08  [ main:1494 ] - [ DEBUG ]  JsqlParserCountOptimize sql=SELECT
-         
-        id,text,url,parentIds
-     
-        FROM system_menu
-         WHERE  text like concat('%',?,'%')
-2020-10-10 21:06:08  [ main:1527 ] - [ DEBUG ]  ==>  Preparing: SELECT COUNT(1) FROM system_menu WHERE text LIKE concat('%', ?, '%')
-2020-10-10 21:06:08  [ main:1549 ] - [ DEBUG ]  ==> Parameters: -(String)
-2020-10-10 21:06:08  [ main:1572 ] - [ DEBUG ]  ==>  Preparing: SELECT id,text,url,parentIds FROM system_menu WHERE text like concat('%',?,'%') LIMIT ?,?
-2020-10-10 21:06:08  [ main:1573 ] - [ DEBUG ]  ==> Parameters: -(String), 2(Long), 2(Long)
-2020-10-10 21:06:08  [ main:1579 ] - [ DEBUG ]  <==      Total: 2
-2020-10-10 21:06:08  [ main:1580 ] - [ DEBUG ]  Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6b88ca8c]
-2020-10-10 21:08:33  [ main:0 ] - [ DEBUG ]  Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
-2020-10-10 21:08:34  [ main:741 ] - [ DEBUG ]  Creating a new SqlSession
-2020-10-10 21:08:34  [ main:750 ] - [ DEBUG ]  SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6b88ca8c] was not registered for synchronization because synchronization is not active
-2020-10-10 21:08:34  [ main:835 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
-2020-10-10 21:08:35  [ main:1439 ] - [ INFO ]  {dataSource-1} inited
-2020-10-10 21:08:35  [ main:1443 ] - [ DEBUG ]  JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@25bcd0c7] will not be managed by Spring
-2020-10-10 21:08:35  [ main:1451 ] - [ DEBUG ]  JsqlParserCountOptimize sql=SELECT
-         
-        id,text,url,parentIds
-     
-        FROM system_menu
-         WHERE  text like concat('%',?,'%')
+2020-10-12 10:01:28  [ main:832 ] - [ DEBUG ]  Creating a new SqlSession
+2020-10-12 10:01:28  [ main:839 ] - [ DEBUG ]  SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@387a8303] was not registered for synchronization because synchronization is not active
+2020-10-12 10:01:28  [ main:934 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
+2020-10-12 10:01:28  [ main:1500 ] - [ INFO ]  {dataSource-1} inited
+2020-10-12 10:01:28  [ main:1503 ] - [ DEBUG ]  JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@fcb4004] will not be managed by Spring
+2020-10-12 10:01:28  [ main:1514 ] - [ DEBUG ]  JsqlParserCountOptimize sql=select  
+        id,pwd,name,code,car_code,time
+      from info_user
+2020-10-12 10:01:28  [ main:1545 ] - [ DEBUG ]  ==>  Preparing: SELECT COUNT(1) FROM info_user
+2020-10-12 10:01:28  [ main:1571 ] - [ DEBUG ]  ==> Parameters: 
+2020-10-12 10:01:28  [ main:1590 ] - [ DEBUG ]  Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@387a8303]
+2020-10-12 10:01:45  [ main:0 ] - [ DEBUG ]  Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
+2020-10-12 10:01:46  [ main:782 ] - [ DEBUG ]  Creating a new SqlSession
+2020-10-12 10:01:46  [ main:788 ] - [ DEBUG ]  SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@387a8303] was not registered for synchronization because synchronization is not active
+2020-10-12 10:01:46  [ main:873 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
+2020-10-12 10:01:47  [ main:1446 ] - [ INFO ]  {dataSource-1} inited
+2020-10-12 10:01:47  [ main:1451 ] - [ DEBUG ]  JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@fcb4004] will not be managed by Spring
+2020-10-12 10:01:47  [ main:1462 ] - [ DEBUG ]  JsqlParserCountOptimize sql=select  
+        id,pwd,name,code,car_code,time
+      from info_user
+2020-10-12 10:01:47  [ main:1498 ] - [ DEBUG ]  ==>  Preparing: SELECT COUNT(1) FROM info_user
+2020-10-12 10:01:47  [ main:1525 ] - [ DEBUG ]  ==> Parameters: 

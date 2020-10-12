@@ -17,29 +17,42 @@
     <!-- 扫描 注解 不扫描 子类(springMVC) controller 注解 -->
     <context:component-scan base-package="com.service.impl"/>
 
-    <!-- 事务 -->
-    <!-- 事务控制管理器 -->
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <!-- 配置事务管理 -->
+    <bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="druidDataSource"/>
     </bean>
-    <!-- 配置事务通知 -->
-    <tx:advice id="targetAdvice" transaction-manager="transactionManager">
+
+    <!-- 事务管理 属性 -->
+    <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-            <tx:method name="insert*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
-            <tx:method name="update*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
-            <tx:method name="delete*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
-            <tx:method name="list*" read-only="true"/>
-            <tx:method name="get*" read-only="true"/>
-            <tx:method name="query*" read-only="true"/>
+            <tx:method name="add*" propagation="REQUIRED"/>
+            <tx:method name="append*" propagation="REQUIRED"/>
+            <tx:method name="insert*" propagation="REQUIRED"/>
+            <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="modify*" propagation="REQUIRED"/>
+            <tx:method name="edit*" propagation="REQUIRED"/>
+            <tx:method name="insert*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="remove*" propagation="REQUIRED"/>
+            <tx:method name="repair" propagation="REQUIRED"/>
+
+            <tx:method name="get*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="query*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="find*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="load*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="search*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="datagrid*" propagation="REQUIRED" read-only="true"/>
+
+            <tx:method name="*" propagation="REQUIRED" read-only="true"/>
         </tx:attributes>
     </tx:advice>
 
-    <!-- 配置事务的切入点 -->
+    <!-- 配置切面 -->
     <aop:config>
-        <aop:pointcut expression="within(com.service.*.impl.*)" id="targetPoint"/>
-        <aop:advisor advice-ref="targetAdvice" pointcut-ref="targetPoint"/>
+        <aop:pointcut id="transactionPointcut" expression="execution(* com.service.impl.*.*(..))"/>
+        <aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice"/>
     </aop:config>
 
     <aop:aspectj-autoproxy/>
-
 </beans>

@@ -1,6 +1,4 @@
-2020-10-10 21:08:35  [ main:1487 ] - [ DEBUG ]  ==>  Preparing: SELECT COUNT(1) FROM system_menu WHERE text LIKE concat('%', ?, '%')
-2020-10-10 21:08:35  [ main:1509 ] - [ DEBUG ]  ==> Parameters: -(String)
-2020-10-10 21:08:35  [ main:1533 ] - [ DEBUG ]  ==>  Preparing: SELECT id,text,url,parentIds FROM system_menu WHERE text like concat('%',?,'%') LIMIT ?,?
-2020-10-10 21:08:35  [ main:1534 ] - [ DEBUG ]  ==> Parameters: -(String), 2(Long), 2(Long)
-2020-10-10 21:08:35  [ main:1540 ] - [ DEBUG ]  <==      Total: 2
-2020-10-10 21:08:35  [ main:1541 ] - [ DEBUG ]  Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6b88ca8c]
+2020-10-12 10:01:47  [ main:1555 ] - [ DEBUG ]  ==>  Preparing: select id,pwd,name,code,car_code,time from info_user LIMIT ?
+2020-10-12 10:01:47  [ main:1557 ] - [ DEBUG ]  ==> Parameters: 2(Long)
+2020-10-12 10:01:47  [ main:1564 ] - [ DEBUG ]  <==      Total: 1
+2020-10-12 10:01:47  [ main:1565 ] - [ DEBUG ]  Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@387a8303]

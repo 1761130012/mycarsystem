@@ -43,12 +43,6 @@ public class SystemMenuController {
         return systemMenuService.queryAll(0);
     }
 
-    @RequestMapping("/queryMenuTitleParentId")
-    @ResponseBody
-    public String queryMenuTitleParentId(int id) {
-        return systemMenuService.queryMenuTitleParentId(id);
-    }
-
     @RequestMapping("/insertMenu")
     @ResponseBody
     public boolean insertMenu(SystemMenu menu){
@@ -77,5 +71,14 @@ public class SystemMenuController {
     @ResponseBody
     public List<SystemMenuCode> queryAllCode(){
         return systemMenuService.queryAllCode();
+    }
+
+    /**
+     * 根据 id  查询 本 id 的父id  在 以父 id 查询 有 相同 父 id 的菜单
+     */
+    @RequestMapping("/queryMenuParentId")
+    @ResponseBody
+    public List<SystemMenu> queryMenuParentId(Integer id){
+        return systemMenuService.queryMenuParentId(id);
     }
 }

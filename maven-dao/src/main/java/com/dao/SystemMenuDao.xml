@@ -24,11 +24,6 @@
         FROM system_menu WHERE parentIds=#{parentId}
     </select>
 
-    <!-- String selectTitleParentIds(int parentIds); -->
-    <select id="selectTitleParentIds" parameterType="int" resultType="String">
-        select text from system_menu where id=#{id};
-    </select>
-
     <!-- IPage<SystemMenu> selectPageVo(@Param("page") Page<?> page,@Param("menu") SystemMenu menu); -->
     <select id="selectPageVo" resultType="SystemMenu">
         SELECT
@@ -45,5 +40,10 @@
         <foreach collection="menuIds" item="id" open="(" separator="," close=")">
             #{id}
         </foreach>
+    </select>
+
+    <!-- List<SystemMenu> selectMenuParentId(Integer id); -->
+    <select id="selectMenuParentId" parameterType="int" resultType="SystemMenu">
+        select id,text from system_menu where parentIds in( select parentIds from system_menu where id=#{id}) ;
     </select>
 </mapper>
